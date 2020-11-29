@@ -40,12 +40,7 @@ namespace NSE.Identidade.API
         {
             app.UseSwaggerConfiguration();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            };
-
-            app.UseApiConfiguration();
+            app.UseApiConfiguration(env);
 
         }
     }

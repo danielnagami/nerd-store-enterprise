@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace NSE.Identidade.API.Configuration
 {
@@ -12,8 +14,13 @@ namespace NSE.Identidade.API.Configuration
             return services;
         }
 
-        public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app)
+        public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            };
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
