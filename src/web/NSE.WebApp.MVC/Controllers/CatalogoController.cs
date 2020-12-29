@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Controllers
 {
+    [Route("Catalogo")]
     public class CatalogoController : MainController
     {
         private readonly ICatalogoService _catalogoService;
@@ -16,7 +17,7 @@ namespace NSE.WebApp.MVC.Controllers
 
         [HttpGet]
         [Route("")]
-        [Route("vitrine")]
+        [Route("Vitrine")]
         public async Task<IActionResult> Index()
         {
             var produtos = await _catalogoService.ObterTodos();
@@ -25,7 +26,7 @@ namespace NSE.WebApp.MVC.Controllers
         }
 
         [HttpGet]
-        [Route("Catalogo/Produto-Detalhe/{id}")]
+        [Route("Produto-Detalhe/{id}")]
         public async Task<IActionResult> Index(Guid id)
         {
             var produto = await _catalogoService.ObterPorId(id);
