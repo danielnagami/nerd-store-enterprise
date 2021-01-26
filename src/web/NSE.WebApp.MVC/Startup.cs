@@ -32,7 +32,7 @@ namespace NSE.WebApp.MVC
 
             services.AddMVCConfiguration(Configuration);
 
-            services.RegisterServices();
+            services.RegisterServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
