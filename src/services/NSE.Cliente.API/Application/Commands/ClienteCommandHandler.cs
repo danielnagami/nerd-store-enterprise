@@ -1,17 +1,32 @@
-﻿using System;
+﻿using FluentValidation.Results;
+using MediatR;
+using NSE.Core.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NSE.Cliente.API.Application.Commands
 {
-    public class ClienteCommandHandler
+    public class ClienteCommandHandler : CommandHandler, IRequestHandler<RegistrarClienteCommand, ValidationResult>
     {
-        public void Manipular(RegistrarClienteCommand message)
+        public async Task<ValidationResult> Handle(RegistrarClienteCommand message, CancellationToken cancellationToken)
         {
-            // Validar comando
+            if (!message.Valido()) return message.ValidationResult;
 
-            // Persistir na base
+            var cliente = new Models.Cliente(message.Id, message.Nome, message.Email, message.Cpf);
+
+            // Validacoes de negocio
+
+            // Persistir no banco
+            if(true) //Ja existe um cliente com o CPF informado
+            {
+                AdicionarErro("Este CPF já está em uso.");
+                return ValidationResult;
+            }
+
+            return message.ValidationResult;
         }
     }
 }
