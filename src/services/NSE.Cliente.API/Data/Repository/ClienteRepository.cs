@@ -9,7 +9,7 @@ namespace NSE.Cliente.API.Data.Repository
     public class ClienteRepository : IClienteRepository
     {
         private readonly ClientesContext _context;
-        private IUnitOfWork UnitofWork => _context;
+        public IUnitOfWork UnitOfWork => _context;
 
         public ClienteRepository(ClientesContext context)
         {
