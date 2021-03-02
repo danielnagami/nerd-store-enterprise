@@ -19,44 +19,54 @@ namespace NSE.Core.DomainObjects
         {
             cpf = cpf.ApenasNumeros(cpf);
 
-            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-
-            cpf = cpf.Trim().Replace(".", "").Replace("-", "");
-            if (cpf.Length != 11)
+            if (cpf.Length > 11)
                 return false;
 
-            for (int j = 0; j < 10; j++)
-                if (j.ToString().PadLeft(11, char.Parse(j.ToString())) == cpf)
+            while (cpf.Length != 11)
+                cpf = '0' + cpf;
+
+            var igual = true;
+            for (var i = 1; i < 11 && igual; i++)
+                if (cpf[i] != cpf[0])
+                    igual = false;
+
+            if (igual || cpf == "12345678909")
+                return false;
+
+            var numeros = new int[11];
+
+            for (var i = 0; i < 11; i++)
+                numeros[i] = int.Parse(cpf[i].ToString());
+
+            var soma = 0;
+            for (var i = 0; i < 9; i++)
+                soma += (10 - i) * numeros[i];
+
+            var resultado = soma % 11;
+
+            if (resultado == 1 || resultado == 0)
+            {
+                if (numeros[9] != 0)
                     return false;
+            }
+            else if (numeros[9] != 11 - resultado)
+                return false;
 
-            string tempCpf = cpf.Substring(0, 9);
-            int soma = 0;
-
-            for (int i = 0; i < 9; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
-
-            int resto = soma % 11;
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-
-            string digito = resto.ToString();
-            tempCpf = tempCpf + digito;
             soma = 0;
-            for (int i = 0; i < 10; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+            for (var i = 0; i < 10; i++)
+                soma += (11 - i) * numeros[i];
 
-            resto = soma % 11;
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
+            resultado = soma % 11;
 
-            digito = digito + resto.ToString();
+            if (resultado == 1 || resultado == 0)
+            {
+                if (numeros[10] != 0)
+                    return false;
+            }
+            else if (numeros[10] != 11 - resultado)
+                return false;
 
-            return cpf.EndsWith(digito);
+            return true;
         }
     }
 }
