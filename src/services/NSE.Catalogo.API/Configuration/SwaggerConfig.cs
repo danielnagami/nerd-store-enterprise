@@ -21,7 +21,7 @@ namespace NSE.Catalogo.API.Configuration
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Insira o token JWT desta maneirar: Bearer {seu token}",
+                    Description = "Insira o token JWT desta maneira: Bearer {seu token}",
                     Name = "Authorization",
                     Scheme = "Bearer",
                     BearerFormat = "JWT",

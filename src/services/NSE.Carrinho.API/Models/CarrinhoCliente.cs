@@ -9,10 +9,12 @@ namespace NSE.Carrinho.API.Models
     public class CarrinhoCliente
     {
         internal const int MAX_QUANTIDADE_ITEM = 5;
-        public CarrinhoCliente()
-        {
 
-        }
+        public Guid Id { get; set; }
+        public Guid ClienteId { get; set; }
+        public decimal ValorTotal { get; set; }
+        public List<CarrinhoItem> Itens { get; set; } = new List<CarrinhoItem>();
+        public ValidationResult ValidationResult { get; set; }
 
         public CarrinhoCliente(Guid clienteId)
         {
@@ -20,11 +22,7 @@ namespace NSE.Carrinho.API.Models
             ClienteId = clienteId;
         }
 
-        public Guid Id { get; set; }
-        public Guid ClienteId { get; set; }
-        public decimal ValorTotal { get; set; }
-        public List<CarrinhoItem> Itens { get; set; } = new List<CarrinhoItem>();
-        public ValidationResult ValidationResult { get; set; }
+        public CarrinhoCliente() { }
 
         internal void CalcularValorCarrinho()
         {
@@ -79,7 +77,6 @@ namespace NSE.Carrinho.API.Models
         internal void RemoverItem(CarrinhoItem item)
         {
             Itens.Remove(ObterPorProdutoId(item.ProdutoId));
-
             CalcularValorCarrinho();
         }
 
@@ -88,7 +85,7 @@ namespace NSE.Carrinho.API.Models
             var erros = Itens.SelectMany(i => new CarrinhoItem.ItemCarrinhoValidation().Validate(i).Errors).ToList();
             erros.AddRange(new CarrinhoClienteValidation().Validate(this).Errors);
             ValidationResult = new ValidationResult(erros);
-            
+
             return ValidationResult.IsValid;
         }
 

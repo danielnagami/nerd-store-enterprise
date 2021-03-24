@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Controllers
 {
-    [Route("carrinho")]
     public class CarrinhoController : MainController
     {
         private readonly ICarrinhoService _carrinhoService;
@@ -26,7 +25,7 @@ namespace NSE.WebApp.MVC.Controllers
         }
 
         [HttpPost]
-        [Route("adicionar-item")]
+        [Route("carrinho/adicionar-item")]
         public async Task<IActionResult> AdicionarItemCarrinho(ItemProdutoViewModel itemProduto)
         {
             var produto = await _catalogoService.ObterPorId(itemProduto.ProdutoId);
@@ -46,7 +45,7 @@ namespace NSE.WebApp.MVC.Controllers
         }
 
         [HttpPut]
-        [Route("atualizar-item")]
+        [Route("carrinho/atualizar-item")]
         public async Task<IActionResult> AtualizarItemCarrinho(Guid produtoId, int quantidade)
         {
             var produto = await _catalogoService.ObterPorId(produtoId);
@@ -65,7 +64,7 @@ namespace NSE.WebApp.MVC.Controllers
         }
 
         [HttpDelete]
-        [Route("remover-item")]
+        [Route("carrinho/remover-item")]
         public async Task<IActionResult> RemoverItemCarrinho(Guid produtoId)
         {
             var produto = await _catalogoService.ObterPorId(produtoId);

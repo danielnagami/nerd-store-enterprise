@@ -29,7 +29,7 @@ namespace NSE.Carrinho.API.Controllers
             return await ObterCarrinhoCliente() ?? new CarrinhoCliente();
         }
 
-        [HttpGet("carrinho")]
+        [HttpPost("carrinho")]
         public async Task<IActionResult> AdicionarItemCarrinho(CarrinhoItem item)
         {
             var carrinho = await ObterCarrinhoCliente();
@@ -42,7 +42,7 @@ namespace NSE.Carrinho.API.Controllers
             if (!OperacaoValida()) return CustomResponse();
 
             await PersistirDados();
-            
+
             return CustomResponse();
         }
 
@@ -51,7 +51,7 @@ namespace NSE.Carrinho.API.Controllers
         {
             var carrinho = await ObterCarrinhoCliente();
             var itemCarrinho = await ObterItemCarrinhoValidado(produtoId, carrinho, item);
-            if(itemCarrinho == null) return CustomResponse();
+            if (itemCarrinho == null) return CustomResponse();
 
             carrinho.AtualizarUnidades(itemCarrinho, item.Quantidade);
 
@@ -88,9 +88,11 @@ namespace NSE.Carrinho.API.Controllers
 
         private async Task<CarrinhoCliente> ObterCarrinhoCliente()
         {
-            return await _context.CarrinhoCliente
+            var carrinho = await _context.CarrinhoCliente
                 .Include(c => c.Itens)
                 .FirstOrDefaultAsync(c => c.ClienteId == _user.ObterUserId());
+
+            return carrinho;
         }
 
         private void ManipularNovoCarrinho(CarrinhoItem item)
@@ -126,7 +128,7 @@ namespace NSE.Carrinho.API.Controllers
 
         private async Task<CarrinhoItem> ObterItemCarrinhoValidado(Guid produtoId, CarrinhoCliente carrinho, CarrinhoItem item = null)
         {
-            if(item != null && produtoId != item.ProdutoId)
+            if (item != null && produtoId != item.ProdutoId)
             {
                 AdicionarErroProcessamento("O item não corresponde ao informado");
                 return null;
@@ -159,7 +161,7 @@ namespace NSE.Carrinho.API.Controllers
         private bool ValidarCarrinho(CarrinhoCliente carrinho)
         {
             if (carrinho.EhValido()) return true;
-             
+
             carrinho.ValidationResult.Errors.ToList().ForEach(e => AdicionarErroProcessamento(e.ErrorMessage));
             return false;
         }

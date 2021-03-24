@@ -11,7 +11,7 @@ namespace NSE.WebAPI.Core.Usuario
             {
                 throw new ArgumentException(nameof(principal));
             }
-            var claim = principal.FindFirst("sub");
+            var claim = principal.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
             return claim?.Value;
         }
 

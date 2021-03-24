@@ -19,7 +19,7 @@ namespace NSE.WebApp.MVC.Services
 
         public async Task<CarrinhoViewModel> ObterCarrinho()
         {
-            var response = await _httpClient.GetAsync("/carrinho/");
+            var response = await _httpClient.GetAsync("/carrinho");
 
             TratarErrosResponse(response);
 
@@ -30,7 +30,7 @@ namespace NSE.WebApp.MVC.Services
         {
             var itemContent = ObterConteudo(produto);
 
-            var response = await _httpClient.PostAsync("/carrinho/", itemContent);
+            var response = await _httpClient.PostAsync("/carrinho", itemContent);
 
             if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
