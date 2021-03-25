@@ -15,7 +15,7 @@ namespace NSE.WebApp.MVC.Controllers
         }
 
         [HttpGet]
-        //[Route("")]
+        [Route("")]
         [Route("Vitrine")]
         public async Task<IActionResult> Index()
         {

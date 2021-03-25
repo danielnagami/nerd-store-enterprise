@@ -79,7 +79,8 @@ namespace NSE.Carrinho.API.Controllers
 
             carrinho.RemoverItem(itemCarrinho);
 
-            _context.CarrinhoItens.Update(itemCarrinho);
+            //_context.CarrinhoItens.Update(itemCarrinho);
+            _context.CarrinhoItens.Remove(itemCarrinho);
             _context.CarrinhoCliente.Update(carrinho);
 
             await PersistirDados();
