@@ -47,7 +47,7 @@ namespace NSE.Carrinho.API.Configuration
 
         }
 
-        public static void UserSwaggerConfiguration(this IApplicationBuilder app)
+        public static void UseSwaggerConfiguration(this IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
