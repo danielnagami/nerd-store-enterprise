@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace NSE.BFF.Compras.Extensions
 {
-    public class HttpClientAuthorizationDelegatinHandler : DelegatingHandler
+    public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
         private readonly IAspNetUser _aspNetUser;
 
-        public HttpClientAuthorizationDelegatinHandler(IAspNetUser aspNetUser)
+        public HttpClientAuthorizationDelegatingHandler(IAspNetUser aspNetUser)
         {
             _aspNetUser = aspNetUser;
         }
@@ -27,7 +27,7 @@ namespace NSE.BFF.Compras.Extensions
 
             var token = _aspNetUser.ObterUserToken();
 
-            if(token != null)
+            if (token != null)
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
