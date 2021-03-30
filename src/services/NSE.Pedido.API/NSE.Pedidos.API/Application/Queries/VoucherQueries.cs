@@ -9,7 +9,7 @@ namespace NSE.Pedidos.API.Application.Queries
         Task<VoucherDTO> ObterVoucherPorCodigo(string codigo);
     }
 
-    public class VoucherQueries
+    public class VoucherQueries : IVoucherQueries
     {
         private readonly IVoucherRepository _voucherRepository;
 
