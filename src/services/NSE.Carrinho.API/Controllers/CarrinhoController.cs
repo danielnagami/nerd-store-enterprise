@@ -26,6 +26,13 @@ namespace NSE.Carrinho.API.Controllers
         [HttpGet("carrinho")]
         public async Task<CarrinhoCliente> ObterCarrinho()
         {
+            //var carrinho = await ObterCarrinhoCliente();
+
+            //if (carrinho == null)
+            //    carrinho = new CarrinhoCliente() { ValorTotal = 0.0M, Desconto = 0.0M};
+
+            //return carrinho;
+
             return await ObterCarrinhoCliente() ?? new CarrinhoCliente();
         }
 

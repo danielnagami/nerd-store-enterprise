@@ -15,7 +15,8 @@ namespace NSE.WebApp.MVC.Extensions
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _comprasBffService.ObterCarrinho() ?? new Models.CarrinhoViewModel());
+            //return View(await _comprasBffService.ObterCarrinho() ?? new Models.CarrinhoViewModel());
+            return View(await _comprasBffService.ObterQuantidadeCarrinho());
         }
     }
 }

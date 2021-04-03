@@ -20,7 +20,7 @@ namespace NSE.WebApp.MVC.Services
 
         public async Task<CarrinhoViewModel> ObterCarrinho()
         {
-            var response = await _httpClient.GetAsync("/compras/carrinho/");
+            var response = await _httpClient.GetAsync("compras/carrinho/");
 
             TratarErrosResponse(response);
 
@@ -61,6 +61,17 @@ namespace NSE.WebApp.MVC.Services
         public async Task<ResponseResult> RemoverItemCarrinho(Guid produtoId)
         {
             var response = await _httpClient.DeleteAsync($"/compras/carrinho/items/{produtoId}");
+
+            if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return RetornoOk();
+        }
+
+        public async Task<ResponseResult> AplicarVoucherCarrinho(string voucher)
+        {
+            var itemContent = ObterConteudo(voucher);
+
+            var response = await _httpClient.PostAsync("/compras/carrinho/aplicar-voucher/", itemContent);
 
             if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
