@@ -20,7 +20,10 @@ namespace NSE.Pedidos.Domain.Pedidos
             ValorUnitario = valorUnitario;
             ProdutoImagem = produtoImagem;
         }
-        protected PedidoItem() { }
+        protected PedidoItem(int quantidade)
+        {
+            Quantidade = quantidade;
+        }
 
         internal decimal CalcularValor()
         {
