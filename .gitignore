@@ -3,3 +3,4 @@ obj/
 packages/
 .vs/
 .vscode/
+appsettings.Development.json
