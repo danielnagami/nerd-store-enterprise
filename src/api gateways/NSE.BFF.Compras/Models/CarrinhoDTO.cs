@@ -7,5 +7,7 @@ namespace NSE.BFF.Compras.Models
         public decimal ValorTotal { get; set; }
         public decimal Desconto { get; set; }
         public List<ItemCarrinhoDTO> Itens { get; set; } = new List<ItemCarrinhoDTO>();
+        public VoucherDTO Voucher { get; set; }
+        public bool VoucherUtilizado { get; set; }
     }
 }

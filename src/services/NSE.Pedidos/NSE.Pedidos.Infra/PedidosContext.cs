@@ -22,6 +22,12 @@ namespace NSE.Pedidos.Infra
             _mediatorHandler = mediatorHandler;
         }
 
+        public PedidosContext(DbContextOptions<PedidosContext> options)
+            : base(options)
+        {
+
+        }
+
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoItem> PedidoItems { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }

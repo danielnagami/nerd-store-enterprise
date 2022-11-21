@@ -39,7 +39,7 @@ namespace NSE.Pedidos.API.Application.DTO
                     Valor = item.ValorUnitario,
                     Quantidade = item.Quantidade,
                     ProdutId = item.ProdutoId,
-                    Imagem = item.ProdutoImagem,
+                    Imagem = item.Imagem,
                     PedidoId = item.PedidoId
                 });
             }

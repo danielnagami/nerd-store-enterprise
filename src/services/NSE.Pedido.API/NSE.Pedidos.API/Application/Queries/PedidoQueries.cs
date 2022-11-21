@@ -36,7 +36,7 @@ namespace NSE.Pedidos.API.Application.Queries
             const string sql = @"SELECT
                                 P.ID AS 'ProdutoId', P.CODIGO, P.VOUCHERUTILIZADO, P.DESCONTO, P.VALORTOTAL, P.PEDIDOSTATUS,
                                 P.LOGRADOURO, P.NUMERO, P.BAIRRO, P.CEP, P.COMPLEMENTO, P.CIDADE, P.ESTADO,
-                                PIT.ID AS 'ProdutoItemId', PIT.PRODUTONOME, PIT.QUANTIDADE, PIT.PRODUTOIMAGEM, PIT.VALORUNITARIO
+                                PIT.ID AS 'ProdutoItemId', PIT.PRODUTONOME, PIT.QUANTIDADE, PIT.IMAGEM, PIT.VALORUNITARIO
                                 FROM PEDIDOS P
                                 INNER JOIN PEDIDOITEMS PIT ON P.ID = PIT.PEDIDOID
                                 WHERE P.CLIENTEID = @clienteId
@@ -80,7 +80,7 @@ namespace NSE.Pedidos.API.Application.Queries
                     Nome = item.PRODUTONOME,
                     Valor = item.VALORUNITARIO,
                     Quantidade = item.QUANTIDADE,
-                    Imagem = item.PRODUTOIMAGEM
+                    Imagem = item.IMAGEM
                 };
 
                 pedido.PedidoItems.Add(pedidoItem);

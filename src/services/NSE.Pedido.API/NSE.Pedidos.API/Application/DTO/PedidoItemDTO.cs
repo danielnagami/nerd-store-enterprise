@@ -14,7 +14,7 @@ namespace NSE.Pedidos.API.Application.DTO
 
         public static PedidoItem ParaPedidoItem(PedidoItemDTO pedidoItemDTO)
         {
-            return new PedidoItem(pedidoItemDTO.ProdutId, pedidoItemDTO.Nome, pedidoItemDTO.Quantidade, pedidoItemDTO.Valor);
+            return new PedidoItem(pedidoItemDTO.ProdutId, pedidoItemDTO.Nome, pedidoItemDTO.Quantidade, pedidoItemDTO.Valor, pedidoItemDTO.Imagem);
         }
     }
 }
